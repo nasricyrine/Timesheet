@@ -1,6 +1,9 @@
 package com.demo.timesheet.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.http.HttpStatus;
+
+import java.util.Date;
 
 public class HttpResponse {
     private int httpStatusCode;
@@ -8,8 +11,13 @@ public class HttpResponse {
     private String reason;
     private String message;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MM-dd-yyyy hh:mm:ss", timezone = "America/Sao_Paulo")
+    private Date timestamp;
 
-    public HttpResponse(){}
+    @Deprecated
+    public HttpResponse() {
+    }
+
 
 
     public HttpResponse(int httpStatusCode, HttpStatus httpStatus, String reason, String message) {

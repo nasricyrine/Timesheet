@@ -1,5 +1,7 @@
 package com.demo.timesheet.domain;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -11,22 +13,27 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false, updatable = false)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private long id;
     private String userId;
     private String firstName;
     private String lastName;
     private String username;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
     private String email;
     private String profileImageUrl;
     private Date lastLoginDate;
     private Date lastLoginDateDisplay;
     private Date joinDate;
-    private String[] roles;
+    private String role;
     private String[] authorities;
     private boolean isActive;
     private boolean isNotLocked;
-    public User() {}
+    @Deprecated
+    public User() {
+    }
+
 
     public User(long id, String userId, String firstName, String lastName, String username, String password, String email, String profileImageUrl, Date lastLoginDate, Date lastLoginDateDisplay, Date joinDate, String[] roles, String[] authorities, boolean isActive, boolean isNotLocked) {
         this.id = id;
@@ -40,14 +47,18 @@ public class User implements Serializable {
         this.lastLoginDate = lastLoginDate;
         this.lastLoginDateDisplay = lastLoginDateDisplay;
         this.joinDate = joinDate;
-        this.roles = roles;
+        this.role = role;
         this.authorities = authorities;
         this.isActive = isActive;
         this.isNotLocked = isNotLocked;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public void setId(long id) {
@@ -134,12 +145,12 @@ public class User implements Serializable {
         this.joinDate = joinDate;
     }
 
-    public String[] getRoles() {
-        return roles;
+    public String getRole() {
+        return role;
     }
 
-    public void setRoles(String[] roles) {
-        this.roles = roles;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String[] getAuthorities() {
