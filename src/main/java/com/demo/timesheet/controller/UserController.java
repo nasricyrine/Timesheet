@@ -159,6 +159,7 @@ public class UserController {
                 new HttpResponse(httpStatus.value(), httpStatus, httpStatus.getReasonPhrase().toUpperCase(), message),
                 httpStatus);
     }
+    @PostMapping("/generate Token")
 
     private HttpHeaders getJwtHeader(UserPrincipal userPrincipal) {
         HttpHeaders httpHeaders = new HttpHeaders();
